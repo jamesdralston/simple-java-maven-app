@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage ('Run Maven') {
+    stage ('Build') {
       agent { 
         kubernetes {
           label 'maven-alpine-pod'
@@ -10,8 +10,7 @@ pipeline {
       }  
       steps {
         container ('maven') {
-          echo 'Hello Maven!'
-          sh 'mvn -version'
+          sh 'mvn -B -DskipTests clean package'
         }
       }
     }
