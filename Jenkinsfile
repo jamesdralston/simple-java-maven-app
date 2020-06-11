@@ -27,7 +27,9 @@ pipeline {
     }
     stage('Analysis') {
       steps {
-        sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
+        container ('maven') {
+          sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
+        }
       }
       post {
         always {
