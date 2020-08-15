@@ -10,11 +10,11 @@ pipeline {
       steps {
         container ('maven') {
           sh 'mvn -V -e clean verify -Dmaven.test.failure.ignore'
-          jacoco()
         }
       }
       post {
         always {
+          jacoco maximumClassCoverage: '100', maximumLineCoverage: '80', maximumMethodCoverage: '100', minimumClassCoverage: '90', minimumLineCoverage: '50', minimumMethodCoverage: '80', runAlways: true
           recordIssues enabledForFailure: true,  tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
           recordIssues enabledForFailure: true, tool: errorProne(), healthy: 1, unhealthy: 20
           recordIssues enabledForFailure: true, tools: [pmdParser(pattern: 'target/pmd.xml'),
