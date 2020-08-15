@@ -14,7 +14,6 @@ pipeline {
       }
       post {
         always {
-          jacoco()
           recordIssues enabledForFailure: true,  tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
           recordIssues enabledForFailure: true, tool: errorProne(), healthy: 1, unhealthy: 20
           recordIssues enabledForFailure: true, tools: [pmdParser(pattern: 'target/pmd.xml'),
