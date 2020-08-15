@@ -6,10 +6,21 @@ pipeline {
      }
   }  
   stages {
-    stage ('Build') {
+    stage ('Build and Analysis') {
       steps {
         container ('maven') {
-          sh 'mvn verify'
+          sh 'mvn -V -e clean verify -Dmaven.test.failure.ignore'
+        }
+      }
+      post {
+        always {
+          recordIssues tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
+          recordIssues tool: errorProne(), healthy: 1, unhealthy: 20
+          recordIssues tools: [checkStyle(pattern: 'target/checkstyle-result.xml'),
+            spotBugs(pattern: 'target/spotbugsXml.xml'),
+            pmdParser(pattern: 'target/pmd.xml'),
+            cpd(pattern: 'target/cpd.xml')],
+            qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
         }
       }
     }
@@ -22,21 +33,6 @@ pipeline {
       post {
         always {
           junit 'target/surefire-reports/*.xml'
-        }
-      }
-    }
-    stage('Analysis') {
-      steps {
-        container ('maven') {
-          sh "mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs"
-        }
-      }
-      post {
-        always {
-          recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-          recordIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
-          recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
-          recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
         }
       }
     }
