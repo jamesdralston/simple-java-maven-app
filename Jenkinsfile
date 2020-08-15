@@ -14,7 +14,7 @@ pipeline {
       }
       post {
         always {
-          jacoco maximumBranchCoverage: '80', maximumClassCoverage: '100', maximumComplexityCoverage: '80', maximumInstructionCoverage: '80', maximumLineCoverage: '70', maximumMethodCoverage: '80', minimumBranchCoverage: '70', minimumClassCoverage: '90', minimumComplexityCoverage: '70', minimumInstructionCoverage: '70', minimumLineCoverage: '50', minimumMethodCoverage: '70', runAlways: true
+          jacoco()
           recordIssues enabledForFailure: true,  tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
           recordIssues enabledForFailure: true, tool: errorProne(), healthy: 1, unhealthy: 20
           recordIssues enabledForFailure: true, tools: [pmdParser(pattern: 'target/pmd.xml'),
