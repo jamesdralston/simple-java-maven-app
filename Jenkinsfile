@@ -16,11 +16,11 @@ pipeline {
         always {
           recordIssues enabledForFailure: true,  tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
           recordIssues enabledForFailure: true, tool: errorProne(), healthy: 1, unhealthy: 20
-          recordIssues enabledForFailure: true, tools: [checkStyle(pattern: 'target/checkstyle-result.xml'),
-            spotBugs(pattern: 'target/spotbugsXml.xml'),
-            pmdParser(pattern: 'target/pmd.xml'),
-            cpd(pattern: 'target/cpd.xml')],
+          recordIssues enabledForFailure: true, tools: [pmdParser(pattern: 'target/pmd.xml'),
+            spotBugs(pattern: 'target/spotbugsXml.xml')],
             qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+          recordIssues enabledForFailure: true, tools: [checkStyle(pattern: 'target/checkstyle-result.xml'),
+            cpd(pattern: 'target/cpd.xml')]
         }
       }
     }
