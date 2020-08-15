@@ -7,13 +7,9 @@ pipeline {
   }  
   stages {
     stage ('Build') {
-      when {
-        beforeAgent true
-        branch 'master'
-      }
       steps {
         container ('maven') {
-          sh 'mvn -B -DskipTests clean package'
+          sh 'mvn verify'
         }
       }
     }
