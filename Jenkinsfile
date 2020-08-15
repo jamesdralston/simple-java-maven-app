@@ -34,7 +34,7 @@ pipeline {
       post {
         always {
           recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-          recordIssues enabledForFailure: true, tool: checkStyle(pattern: 'target/checkstyle-result.xml')
+          recordIssues tool: checkStyle(pattern: '**/target/checkstyle-result.xml')
           recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
           recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
         }
