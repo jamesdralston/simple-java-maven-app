@@ -10,11 +10,11 @@ pipeline {
       steps {
         container ('maven') {
           sh 'mvn -V -e clean verify -Dmaven.test.failure.ignore'
+          jacoco()
         }
       }
       post {
         always {
-          jacoco execPattern:'**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'
           recordIssues enabledForFailure: true,  tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
           recordIssues enabledForFailure: true, tool: errorProne(), healthy: 1, unhealthy: 20
           recordIssues enabledForFailure: true, tools: [pmdParser(pattern: 'target/pmd.xml'),
