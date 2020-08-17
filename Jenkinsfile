@@ -30,7 +30,7 @@ pipeline {
     stage ('Test') {
       steps {
          container ('maven') {
-           sh 'mvn test -s /home/jenkins/.m2/settings.xml'
+           sh 'mvn -q test'
          }
       }
       post {
