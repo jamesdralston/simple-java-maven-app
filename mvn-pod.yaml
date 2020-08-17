@@ -6,6 +6,8 @@ spec:
   - name: maven-settings
     configMap:
       name: maven-settings
+  securityContext:
+    runAsUser: 1000
   containers:
   - name: maven
     image: maven:3-alpine
@@ -14,4 +16,4 @@ spec:
     tty: true
     volumeMounts:
     - name: maven-settings
-      mountPath: /root/.m2
+      mountPath: /home/jenkins/.m2
