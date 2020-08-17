@@ -2,6 +2,7 @@ pipeline {
   agent { 
     kubernetes {
       label 'maven-alpine-pod'
+      idleMinutes 60
        yamlFile 'mvn-pod.yaml'
      }
   }  
