@@ -2,9 +2,16 @@ kind: Pod
 metadata:
   name: maven-alpine-pod
 spec:
+  volumes:
+  - name: maven-settings
+    configMap:
+      name: maven-settings
   containers:
   - name: maven
     image: maven:3-alpine
     command:
     - cat
     tty: true
+    volumeMounts:
+    - name: maven-settings
+      mountPath: /home/jenkins/.m2
