@@ -2,7 +2,7 @@ pipeline {
   agent { 
     kubernetes {
       label 'maven-alpine-pod'
-      podRetention 'always()'
+      podRetention always()
       yamlFile 'mvn-pod.yaml'
      }
   }  
