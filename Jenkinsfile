@@ -9,8 +9,8 @@ pipeline {
     stage ('Build and Analysis') {
       steps {
         container ('maven') {
-          sh 'mvn help:effective-settings'
-          sh 'mvn -V -e clean verify -Dmaven.test.failure.ignore'
+          sh 'mvn -B help:effective-settings'
+          sh 'mvn -V -B -e clean verify -Dmaven.test.failure.ignore'
         }
       }
       post {
