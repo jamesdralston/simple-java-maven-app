@@ -2,10 +2,6 @@ kind: Pod
 metadata:
   name: maven-alpine-pod
 spec:
-  volumes:
-  - name: maven-settings
-    configMap:
-      name: maven-settings
   securityContext:
     runAsUser: 1000
   containers:
@@ -14,6 +10,3 @@ spec:
     command:
     - cat
     tty: true
-    volumeMounts:
-    - name: maven-settings
-      mountPath: /home/jenkins/.m2
