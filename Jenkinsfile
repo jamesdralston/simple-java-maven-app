@@ -9,8 +9,8 @@ pipeline {
     stage ('Build and Analysis') {
       steps {
         container ('maven') {
-          sh 'mvn -B help:effective-settings'
-          sh 'mvn -V -B -e clean verify -Dmaven.test.failure.ignore'
+          sh 'mvn -q help:effective-settings -s /home/jenkins/.m2/settings.xml'
+          sh 'mvn -V -B -e clean verify -Dmaven.test.failure.ignore  -s /home/jenkins/.m2/settings.xml'
         }
       }
       post {
@@ -29,7 +29,7 @@ pipeline {
     stage ('Test') {
       steps {
          container ('maven') {
-           sh 'mvn test'
+           sh 'mvn test -s /home/jenkins/.m2/settings.xml'
          }
       }
       post {
