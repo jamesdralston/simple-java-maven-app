@@ -14,4 +14,4 @@ spec:
     tty: true
     volumeMounts:
     - name: maven-settings
-      mountPath: ~/jenkins/.m2
+      mountPath: /root/jenkins/.m2
