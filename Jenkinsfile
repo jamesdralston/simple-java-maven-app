@@ -3,6 +3,7 @@ pipeline {
     kubernetes {
       label 'maven-alpine-pod'
       podRetention always()
+      idleMinutes 120
       yamlFile 'mvn-pod.yaml'
      }
   }  
