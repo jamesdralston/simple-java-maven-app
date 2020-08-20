@@ -11,7 +11,7 @@ pipeline {
     stage ('Build and Analysis') {
       steps {
         container ('maven') {
-          sh 'mvn -V -q -e clean verify -Dmaven.test.failure.ignore -Dpmd.failOnViolation=false'
+          sh 'mvn -V -q -e clean verify -Dmaven.test.failure.ignore'
         }
       }
       post {
