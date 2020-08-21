@@ -6,7 +6,10 @@ pipeline {
       idleMinutes 120
       yamlFile 'mvn-pod.yaml'
      }
-  }  
+  }
+  options {
+   timeout(time: 30, unit: 'MINUTES') 
+  }
   stages {
     stage ('Build and Analysis') {
       steps {
