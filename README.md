@@ -1,15 +1,5 @@
 # simple-java-maven-app
 
-This repository is for the
-[Build a Java app with Maven](https://jenkins.io/doc/tutorials/build-a-java-app-with-maven/)
-tutorial in the [Jenkins User Documentation](https://jenkins.io/doc/).
+A simple Java application using Maven for use with the CloudBees CI Workshop.
 
-The repository contains a simple Java application which outputs the string
-"Hello world!" and is accompanied by a couple of unit tests to check that the
-main application works as expected. The results of these tests are saved to a
-JUnit XML report.
-
-The `jenkins` directory contains an example of the `Jenkinsfile` (i.e. Pipeline)
-you'll be creating yourself during the tutorial and the `scripts` subdirectory
-contains a shell script with commands that are executed when Jenkins processes
-the "Deliver" stage of your Pipeline.
+The CloudBees CI Pipeline Template used with this repository requires a specific file in each branch in order for that branch to be indexed to be processed by the template job. That file name must be `cloudbees-ci.yml`. An example file, name `example.cloudbees-ci.yml` has been provided in this repository and all you have to do is rename that file to `cloudbees-ci.yml` to have the branch processed by the CloudBees CI template.
