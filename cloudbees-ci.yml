@@ -1,0 +1,4 @@
+#custom properties for CloudBees CI Maven Pipeline Template
+
+#jdk - number - valid values are: 8, 11, 14
+jdk: 8
