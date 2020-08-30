@@ -1,4 +1,7 @@
 #custom properties for CloudBees CI Maven Pipeline Template
 
-#jdk - number - valid values are: 8, 11, 14
+#jdk - JDK version to use, type: number, valid values are: 8, 11, 14
 jdk: 8
+
+#lineCoverage - necessary percent of lines that have code coverage, valid values: 0-100
+lineCoverage: 100
